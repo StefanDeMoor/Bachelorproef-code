@@ -7,6 +7,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{9F474CBD-6FB3-4DC3-951F-8A7EACAAE7C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATS", "ATS\ATS.csproj", "{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,18 @@ Global
 		{9F474CBD-6FB3-4DC3-951F-8A7EACAAE7C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F474CBD-6FB3-4DC3-951F-8A7EACAAE7C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F474CBD-6FB3-4DC3-951F-8A7EACAAE7C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DD7646C-4550-4F81-8C6A-F5BDC815EBC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\Shared.projitems*{0b69fac9-04af-4c55-8f47-5b60bb0f2dd4}*SharedItemsImports = 13
+		Shared\Shared.projitems*{5dd7646c-4550-4f81-8c6a-f5bdc815ebc8}*SharedItemsImports = 5
 		Shared\Shared.projitems*{9f474cbd-6fb3-4dc3-951f-8a7eacaae7c4}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
