@@ -7,16 +7,24 @@ namespace ATS.ViewModels
     {
         private readonly UserService _userService;
 
-        [ObservableProperty]
-        private string userName;
+        private string? userName;
+        public string? UserName
+        {
+            get => userName;
+            set => SetProperty(ref userName, value);
+        }
 
-        [ObservableProperty]
-        private string userRole;
+        private string? userRole;
+        public string? UserRole
+        {
+            get => userRole;
+            set => SetProperty(ref userRole, value);
+        }
 
         public DataPageViewModel(UserService userService)
         {
             _userService = userService;
-            LoadUserData();
+            Task.Run(async () => await LoadUserData());
         }
 
         private async Task LoadUserData()
@@ -24,8 +32,8 @@ namespace ATS.ViewModels
             var user = await _userService.GetCurrentUserAsync();
             if (user != null)
             {
-                UserName = user.UserName!.ToLower();
-                UserRole = user.Role!.ToLower();
+                UserName = user.UserName?.ToLower();
+                UserRole = user.Role?.ToLower();
             }
             else
             {

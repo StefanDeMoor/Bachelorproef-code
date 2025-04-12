@@ -10,12 +10,12 @@ namespace ATS.ViewModels
     public partial class HomePageViewModel : ObservableObject
     {
         private readonly UserService _userService;
-        private string _userRole;
+        private string? _userRole;
 
         public HomePageViewModel(UserService userService)
         {
             _userService = userService;
-            InitializeUserRole();
+            Task.Run(async () => await InitializeUserRole());
         }
 
         public bool IsButtonVisible => !string.IsNullOrEmpty(_userRole) && _userRole != "Guest";

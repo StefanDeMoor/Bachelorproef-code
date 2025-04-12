@@ -4,7 +4,7 @@
              xmlns:viewmodel="clr-namespace:ATS.ViewModels"
              x:DataType="viewmodel:LoginPageViewModel"
              x:Class="ATS.Views.LoginPage"
-             Title="{Binding Title}"
+             Title="Login"
              Shell.NavBarIsVisible="False">
 
     <Grid>

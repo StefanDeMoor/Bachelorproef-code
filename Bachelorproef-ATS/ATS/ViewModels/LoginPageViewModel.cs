@@ -4,39 +4,63 @@ using ATS.Models;
 using ATS.Views;
 using ATS.Services;
 using ATS.Services.Users;
+
 namespace ATS.ViewModels
 {
     public partial class LoginPageViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private RegisterModel registerModel;
+        public required RegisterModel registerModel;
+        public RegisterModel RegisterModel
+        {
+            get => registerModel;
+            set => SetProperty(ref registerModel, value);
+        }
 
-        [ObservableProperty]
-        private LoginModel loginModel;
+        public required LoginModel loginModel;
+        public LoginModel LoginModel
+        {
+            get => loginModel;
+            set => SetProperty(ref loginModel, value);
+        }
 
-        [ObservableProperty]
-        private string userName;
+        private string? userName;
+        public string? UserName
+        {
+            get => userName;
+            set => SetProperty(ref userName, value);
+        }
 
-        [ObservableProperty]
-        private string _errorMessage;
+        private string? errorMessage;
+        public string? ErrorMessage
+        {
+            get => errorMessage;
+            set => SetProperty(ref errorMessage, value);
+        }
 
-        [ObservableProperty]
-        private bool _isErrorVisible;
+        private bool isErrorVisible;
+        public bool IsErrorVisible
+        {
+            get => isErrorVisible;
+            set => SetProperty(ref isErrorVisible, value);
+        }
 
-        [ObservableProperty]
         private bool isAuthenticated;
+        public bool IsAuthenticated
+        {
+            get => isAuthenticated;
+            set => SetProperty(ref isAuthenticated, value);
+        }
 
         private readonly ClientService clientService;
         private readonly UserService userService;
 
-        public LoginPageViewModel (ClientService clientService, UserService userService)
+        public LoginPageViewModel(ClientService clientService, UserService userService)
         {
             this.clientService = clientService;
             this.userService = userService;
-            RegisterModel = new();
-            LoginModel = new();
+            RegisterModel = new RegisterModel();
+            LoginModel = new LoginModel();
             IsAuthenticated = false;
-            //IsErrorVisible = false;
         }
 
         [RelayCommand]
@@ -85,8 +109,5 @@ namespace ATS.ViewModels
             IsErrorVisible = true;
             ErrorMessage = message;
         }
-
-        partial void OnUserNameChanged(string value) => LoginCommand.NotifyCanExecuteChanged();
-        //partial void OnPasswordChanged(string value) => LoginCommand.NotifyCanExecuteChanged();
     }
 }
