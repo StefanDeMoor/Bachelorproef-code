@@ -24,7 +24,7 @@
 		<ApplicationTitle>ATS</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.ats</ApplicationId>
+		<ApplicationId>com.companyname.atsmobile</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -60,11 +60,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Platforms\Android\Resources\values\strings.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Platforms\Android\google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <GoogleServicesJson Include="Platforms\Android\google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.4" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.0" />
+		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
 	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net9.0-android'">
+		<PackageReference Include="Xamarin.Google.Dagger">
+		  <Version>2.55.0.1</Version>
+		</PackageReference>
+	</ItemGroup>
+
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\DataPage.xaml">

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "196858807652",
+    "project_id": "test-ats-361c8",
+    "storage_bucket": "test-ats-361c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196858807652:android:c7770988ae42d8cb792671",
+        "android_client_info": {
+          "package_name": "com.companyname.atsmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBBnukC22ITwh3QJG9jfD5VdmQmXA3KLE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

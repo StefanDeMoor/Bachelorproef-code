@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ATS.Services.Users;
+using Plugin.Firebase.CloudMessaging;
 
 
 namespace ATS.ViewModels
@@ -24,6 +25,24 @@ namespace ATS.ViewModels
         {
             await Shell.Current.GoToAsync($"//{nameof(DataPage)}");
         }
+
+        [RelayCommand]
+        private async Task GetFcmToken()
+        {
+            try
+            {
+                await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
+                var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
+                Console.WriteLine($"FCM token: {token}");
+                await Shell.Current.DisplayAlert("FCM Token", token ?? "Token not available", "OK");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting FCM token: {ex.Message}");
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+
 
         private async Task InitializeUserRole()
         {

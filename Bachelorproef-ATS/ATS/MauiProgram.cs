@@ -3,6 +3,16 @@ using ATS.Services.Users;
 using ATS.ViewModels;
 using ATS.Views;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.LifecycleEvents;
+
+
+using Plugin.Firebase.CloudMessaging;
+
+#if IOS
+using Plugin.Firebase.Core.Platforms.iOS;
+#elif ANDROID
+using Plugin.Firebase.Core.Platforms.Android;
+#endif
 
 namespace ATS
 {
@@ -19,24 +29,25 @@ namespace ATS
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.RegisterFirebaseServices();
+
             //niet de beste manier, later oplossen
             builder.Services.AddHttpClient("custom-httpclient")
-    .ConfigurePrimaryHttpMessageHandler(() =>
-    {
-        return new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
-        };
-    })
-    .ConfigureHttpClient(httpClient =>
-    {
-        var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
-            ? "https://10.0.2.2:7194"
-            : "https://localhost:7194";
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    return new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => true
+                    };
+                })
+                .ConfigureHttpClient(httpClient =>
+                {
+                    var baseAddress = DeviceInfo.Platform == DevicePlatform.Android
+                        ? "https://10.0.2.2:7194"
+                        : "https://localhost:7194";
 
-        httpClient.BaseAddress = new Uri(baseAddress);
-    });
-
+                    httpClient.BaseAddress = new Uri(baseAddress);
+                });
 
 #if DEBUG
             builder.Logging.AddDebug();
@@ -53,6 +64,26 @@ namespace ATS
 #endif
 
             return builder.Build();
+        }
+
+        private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)
+        {
+            builder.ConfigureLifecycleEvents(events =>
+            {
+#if IOS
+                events.AddiOS(iOS => iOS.WillFinishLaunching((_, __) =>
+                {
+                    CrossFirebase.Initialize();
+                    FirebaseCloudMessagingImplementation.Initialize();
+                    return false;
+                }));
+#elif ANDROID
+                events.AddAndroid(android => android.OnCreate((activity, _) =>
+                    CrossFirebase.Initialize(activity)));
+#endif
+            });
+
+            return builder;
         }
     }
 }

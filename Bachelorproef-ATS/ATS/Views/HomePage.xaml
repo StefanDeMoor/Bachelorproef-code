@@ -18,5 +18,12 @@
                 HorizontalOptions="Center"
                 Padding="20,10"
                 IsVisible="{Binding IsButtonVisible}" />
+
+        <Button Text="Get FCM Token"
+                Command="{Binding GetFcmTokenCommand}"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Padding="20,10" />  
+
     </VerticalStackLayout>
 </ContentPage>
