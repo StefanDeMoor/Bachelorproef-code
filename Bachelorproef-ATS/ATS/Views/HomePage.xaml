@@ -23,7 +23,13 @@
                 Command="{Binding GetFcmTokenCommand}"
                 VerticalOptions="Center"
                 HorizontalOptions="Center"
-                Padding="20,10" />  
+                Padding="20,10" />
 
+        <Button Text="Send pushnotification"
+                Command="{Binding SendPushNotificationCommand}"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Padding="20,10" />
+        
     </VerticalStackLayout>
 </ContentPage>
