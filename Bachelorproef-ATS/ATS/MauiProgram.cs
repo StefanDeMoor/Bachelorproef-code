@@ -4,8 +4,6 @@ using ATS.ViewModels;
 using ATS.Views;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.LifecycleEvents;
-
-
 using Plugin.Firebase.CloudMessaging;
 
 #if IOS
@@ -63,7 +61,26 @@ namespace ATS
             builder.Services.AddSingleton<DataPageViewModel>();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            CrossFirebaseCloudMessaging.Current.NotificationTapped += async (sender, e) =>
+            {
+                Console.WriteLine("Notification clicked!");
+
+                try
+                {
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await Shell.Current.GoToAsync($"//{nameof(DataPage)}");
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Navigation failed: {ex.Message}");
+                }
+            };
+
+            return app;
         }
 
         private static MauiAppBuilder RegisterFirebaseServices(this MauiAppBuilder builder)

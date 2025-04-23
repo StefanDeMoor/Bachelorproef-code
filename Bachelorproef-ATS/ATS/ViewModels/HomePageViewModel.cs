@@ -81,5 +81,6 @@ namespace ATS.ViewModels
             _userRole = await _userService.GetUserRoleAsync();
             OnPropertyChanged(nameof(IsButtonVisible));
         }
+
     }
 }
